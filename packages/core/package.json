@@ -1,0 +1,22 @@
+{
+  "name": "@whiskeylerts-ingest/core",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "sst": "2.8.13",
+    "vitest": "^0.29.8"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.301.0",
+    "@aws-sdk/client-sns": "^3.329.0",
+    "@aws-sdk/lib-dynamodb": "^3.301.0",
+    "@aws-sdk/smithy-client": "^3.0.0",
+    "@aws-sdk/types": "^3.0.0",
+    "winston": "^3.8.2"
+  }
+}

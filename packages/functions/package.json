@@ -1,0 +1,28 @@
+{
+  "name": "@whiskeylerts-ingest/functions",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.114",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.15.11",
+    "sst": "2.8.13"
+  },
+  "dependencies": {
+    "@aws-sdk/util-dynamodb": "^3.329.0",
+    "@middy/cloudwatch-metrics": "^4.2.8",
+    "@middy/core": "^4.2.8",
+    "@middy/error-logger": "^4.2.8",
+    "@middy/http-cors": "^4.2.8",
+    "@middy/http-error-handler": "^4.2.8",
+    "@middy/http-json-body-parser": "^4.2.8",
+    "@middy/http-security-headers": "^4.2.8",
+    "@middy/input-output-logger": "^4.2.8",
+    "@whiskeylerts-ingest/core": "link:../core",
+    "jsonwebtoken": "^9.0.0"
+  }
+}
