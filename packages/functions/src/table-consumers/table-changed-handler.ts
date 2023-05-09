@@ -10,7 +10,22 @@ export const handler: DynamoDBStreamHandler = async event => {
       const unmarshalled = unmarshall(
         record.dynamodb!.NewImage! as unknown as Record<string, NativeAttributeValue>
       );
-      await sns.publishEvent(unmarshalled, Topic.NotificationsTopic.topicArn);
+      if (unmarshalled.event === 'library.new')
+        await sns.publishEvent(
+          {
+            body: {
+              aps: {
+                alert: {
+                  title: 'WhiskeyFlix',
+                  subtitle: 'New Content Available',
+                  body: unmarshalled.Metadata.title,
+                },
+              },
+            },
+            plex: unmarshalled,
+          },
+          Topic.NotificationsTopic.topicArn
+        );
     }
   }
 };
