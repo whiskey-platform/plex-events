@@ -26,6 +26,9 @@ export const handler: DynamoDBStreamHandler = async event => {
                 },
               },
               channel: 'plex',
+              externalLink: `plex://preplay/?metadataKey=${encodeURIComponent(
+                unmarshalled.Metadata.key
+              )}&metadataType=1&server=${unmarshalled.Server.uuid}`,
             },
             plex: unmarshalled,
           },
