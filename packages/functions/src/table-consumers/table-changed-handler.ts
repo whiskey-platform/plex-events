@@ -10,7 +10,11 @@ export const handler: DynamoDBStreamHandler = async event => {
       const unmarshalled = unmarshall(
         record.dynamodb!.NewImage! as unknown as Record<string, NativeAttributeValue>
       );
-      if (unmarshalled.event === 'library.new')
+      if (unmarshalled.event === 'library.new') {
+        let body = unmarshalled.Metadata.title; // films
+        if (unmarshalled.Metadata.type === 'episode') {
+          body = `${unmarshalled.Metadata.grandparentTitle} - s${unmarshalled.Metadata.parentIndex}e${unmarshalled.Metadata.index} - ${unmarshalled.Metadata.title}`;
+        }
         await sns.publishEvent(
           {
             body: {
@@ -18,7 +22,7 @@ export const handler: DynamoDBStreamHandler = async event => {
                 alert: {
                   title: 'WhiskeyFlix',
                   subtitle: 'New Content Available',
-                  body: unmarshalled.Metadata.title,
+                  body,
                 },
               },
             },
@@ -26,6 +30,7 @@ export const handler: DynamoDBStreamHandler = async event => {
           },
           Topic.NotificationsTopic.topicArn
         );
+      }
     }
   }
 };
