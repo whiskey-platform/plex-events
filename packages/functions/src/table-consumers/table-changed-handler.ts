@@ -14,6 +14,8 @@ export const handler: DynamoDBStreamHandler = async event => {
         let body = unmarshalled.Metadata.title; // films
         if (unmarshalled.Metadata.type === 'episode') {
           body = `${unmarshalled.Metadata.grandparentTitle} - s${unmarshalled.Metadata.parentIndex}e${unmarshalled.Metadata.index} - ${unmarshalled.Metadata.title}`;
+        } else if (unmarshalled.Metadata.type === 'movie') {
+          body = `${unmarshalled.Metadata.title} (${unmarshalled.Metadata.year})`;
         }
         await sns.publishEvent(
           {
