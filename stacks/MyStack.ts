@@ -51,7 +51,7 @@ export function API({ stack, app }: StackContext) {
     };
   }
 
-  const api = new ApiGatewayV1Api(stack, 'api', {
+  const api = new ApiGatewayV1Api(stack, 'RestAPI', {
     routes: {
       'POST /webhook': 'packages/functions/src/webhooks/function.handler',
     },
