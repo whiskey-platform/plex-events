@@ -1,6 +1,12 @@
-import { StackContext, Api, Table, ApiDomainProps, use } from 'sst/constructs';
+import {
+  StackContext,
+  Table,
+  use,
+  ApiGatewayV1Api,
+  ApiGatewayV1ApiCustomDomainProps,
+} from 'sst/constructs';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
-import { DomainName } from '@aws-cdk/aws-apigatewayv2-alpha';
+import { DomainName } from 'aws-cdk-lib/aws-apigateway';
 import { Tags } from 'aws-cdk-lib';
 import { ExistingResources } from './ExistingResources';
 
@@ -22,21 +28,21 @@ export function API({ stack, app }: StackContext) {
   });
   receivedWebhooksTable.bind([notificationsTopic]);
 
-  let customDomain: ApiDomainProps | undefined;
+  let customDomain: ApiGatewayV1ApiCustomDomainProps | undefined;
   if (!app.local && app.stage !== 'local') {
     customDomain = {
       path: 'plex-events',
       cdk: {
         domainName: DomainName.fromDomainNameAttributes(stack, 'ApiDomain', {
-          name: StringParameter.valueFromLookup(
+          domainName: StringParameter.valueFromLookup(
             stack,
             `/sst-outputs/${app.stage}-api-infra-Infra/domainName`
           ),
-          regionalDomainName: StringParameter.valueFromLookup(
+          domainNameAliasTarget: StringParameter.valueFromLookup(
             stack,
             `/sst-outputs/${app.stage}-api-infra-Infra/regionalDomainName`
           ),
-          regionalHostedZoneId: StringParameter.valueFromLookup(
+          domainNameAliasHostedZoneId: StringParameter.valueFromLookup(
             stack,
             `/sst-outputs/${app.stage}-api-infra-Infra/regionalHostedZoneId`
           ),
@@ -45,11 +51,16 @@ export function API({ stack, app }: StackContext) {
     };
   }
 
-  const api = new Api(stack, 'api', {
+  const api = new ApiGatewayV1Api(stack, 'api', {
     routes: {
       'POST /webhook': 'packages/functions/src/webhooks/function.handler',
     },
     customDomain,
+    cdk: {
+      restApi: {
+        binaryMediaTypes: ['multipart/form-data'],
+      },
+    },
   });
   api.bind([receivedWebhooksTable]);
 

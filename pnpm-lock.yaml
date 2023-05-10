@@ -89,9 +89,15 @@ importers:
       '@middy/http-error-handler':
         specifier: ^4.2.8
         version: 4.2.8
+      '@middy/http-header-normalizer':
+        specifier: ^4.4.1
+        version: 4.4.1
       '@middy/http-json-body-parser':
         specifier: ^4.2.8
         version: 4.2.8
+      '@middy/http-multipart-body-parser':
+        specifier: ^4.4.1
+        version: 4.4.1
       '@middy/http-security-headers':
         specifier: ^4.2.8
         version: 4.2.8
@@ -3096,11 +3102,24 @@ packages:
       '@middy/util': 4.2.8
     dev: false
 
+  /@middy/http-header-normalizer@4.4.1:
+    resolution: {integrity: sha512-Qw6EQEVEOxKjxkczCSZVeoKun6yjg9tS46pUIwCJv0FKHWUm5w9eF7MbLM0PfXTiVCiy/DgTAxrBKryaE3TVvw==}
+    engines: {node: '>=16'}
+    dev: false
+
   /@middy/http-json-body-parser@4.2.8:
     resolution: {integrity: sha512-LBmz9CQEV2/KtT18LNQi/rwRX1+pHRlRslkPzdJfNmOTOyaqk5znSjHZ8dxQdDws2IHe3YWdqgO9R8mBvP98tQ==}
     engines: {node: '>=16'}
     dependencies:
       '@middy/util': 4.2.8
+    dev: false
+
+  /@middy/http-multipart-body-parser@4.4.1:
+    resolution: {integrity: sha512-XdzZjOFH4XC4YqLHp/ywAB9CubIU1B14kuwe7BDIV3w7MNPeFQDAGcsrRJSUXmg/N4Q2aPeHmRlV/sUyliKKfQ==}
+    engines: {node: '>=16'}
+    dependencies:
+      '@middy/util': 4.4.1
+      busboy: 1.6.0
     dev: false
 
   /@middy/http-security-headers@4.2.8:
@@ -3119,6 +3138,11 @@ packages:
 
   /@middy/util@4.2.8:
     resolution: {integrity: sha512-gnL4bEWTRpIiPHPgxCNnxYQ6x4IAPWxUklEwN7VPnUKyzG10P3Nt0QVfbHZeEtA/SxBC9jwK8h/zaOvN0kvyCA==}
+    engines: {node: '>=16'}
+    dev: false
+
+  /@middy/util@4.4.1:
+    resolution: {integrity: sha512-MFft2JJJ/j0ajjVB8jICAKd7pCZN4wq8JCSX07ztXr2ln6qBi8ag06cc9BMFkvNLGf7+B6I8ufxWebXWqXwNbw==}
     engines: {node: '>=16'}
     dev: false
 
@@ -3915,7 +3939,6 @@ packages:
     engines: {node: '>=10.16.0'}
     dependencies:
       streamsearch: 1.1.0
-    dev: true
 
   /bytes@3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
@@ -6808,7 +6831,6 @@ packages:
   /streamsearch@1.1.0:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
     engines: {node: '>=10.0.0'}
-    dev: true
 
   /string-width@1.0.2:
     resolution: {integrity: sha512-0XsVpQLnVCXHJfyEs8tC0zpTVIr5PKKsQtkT29IwupnPTjtPmQ3xT/4yCREF9hYkV/3M3kzcUTSAZT6a6h81tw==}
