@@ -25,6 +25,7 @@ export const handler: DynamoDBStreamHandler = async event => {
                   body,
                 },
               },
+              channel: 'plex',
             },
             plex: unmarshalled,
           },
