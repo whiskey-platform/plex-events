@@ -63,6 +63,4 @@ export function API({ stack, app }: StackContext) {
     },
   });
   api.bind([receivedWebhooksTable]);
-
-  stack.getAllFunctions().forEach(fn => Tags.of(fn).add('lumigo:auto-trace', 'true'));
 }
